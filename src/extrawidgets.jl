@@ -135,7 +135,11 @@ b = Box(:h)
 push!(b, a.hour, a.minute, a.second)
 ```
 """
-function timewidget(t::T) where T <: Dates.AbstractTime
+<<<<<<< HEAD
+=======
+function timewidget(t0::Dates.Time; hour_widget=nothing, minute_widget=nothing, second_widget=nothing, box=nothing)
+    t = Signal(t0)
+>>>>>>> bc7b8a2... fixed the box problem
     # values
     h = Dates.value(Dates.Hour(t))
     m = Dates.value(Dates.Minute(t))
@@ -168,8 +172,15 @@ function timewidget(t::T) where T <: Dates.AbstractTime
     setproperty!(widget(hour), :height_request, 1)
     setproperty!(widget(minute), :height_request, 1)
     setproperty!(widget(second), :height_request, 1)
+<<<<<<< HEAD
+=======
+    if box == nothing
+        box = Gtk.Box(:h)
+        push!(box, hour, minute, second)
+    end
     # done
-    return TimeWidget(hour, minute, second)
+    return TimeWidget(t, box)
+>>>>>>> bc7b8a2... fixed the box problem
 end
 
 """
